@@ -1,0 +1,24 @@
+{
+  "name": "auth-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/cds": "^7.9.2",
+    "cookie-parser": "^1.4.6",
+    "passport": "^0.7.0"
+  },
+  "cds": {
+    "requires": {
+      "auth": {
+        "impl": "auth-plugin/auth.js"
+      }
+    }
+  }
+}

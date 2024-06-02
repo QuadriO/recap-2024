@@ -1,0 +1,10 @@
+### SAML Auth Catalog Service without Auth
+GET  http://localhost:4004/odata/v4/basiccatalog/Books
+
+### Basic Auth Catalog Service with user
+GET  http://localhost:4004/odata/v4/basiccatalog/Books
+Authorization: Basic user:123456
+
+### Basic Auth Admin Catalog Service
+GET  http://localhost:4004/odata/v4/basiccatalog/AdminBooks
+Authorization: Basic admin:123456
