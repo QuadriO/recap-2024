@@ -1,12 +1,13 @@
 const passport = require('passport')
 const { BasicStrategy } = require('passport-http')
+
 const cds = require('@sap/cds')
 const LOG = cds.log('auth-basic-plugin')
 
-cds.on('bootstrap', app => {
+cds.on('bootstrap', () => {
   LOG.info('Register basic authentication handler')
   passport.use(
-    new BasicStrategy(function (username, password, next) {
+    new BasicStrategy((username, password, next) => {
       let user = cds.env.users[username]
 
       if (!user) {
@@ -27,6 +28,7 @@ cds.on('bootstrap', app => {
 
       user = Object.assign({}, user)
       user.id = username
+      user.type = 'basic'
       return next(null, user)
     })
   )

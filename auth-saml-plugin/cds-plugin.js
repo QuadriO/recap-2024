@@ -1,9 +1,9 @@
 const passport = require('passport')
+const bodyParser = require('body-parser')
+const SamlStrategy = require('@node-saml/passport-saml').Strategy
+
 const cds = require('@sap/cds')
 const LOG = cds.log('auth-saml-plugin')
-const bodyParser = require('body-parser')
-
-const SamlStrategy = require('@node-saml/passport-saml').Strategy
 
 cds.on('bootstrap', app => {
   LOG.info('Register saml authentication handler')
@@ -14,6 +14,7 @@ cds.on('bootstrap', app => {
         // optional: UPSERT user into database
         const user = {
           id: profile.id,
+          type: 'saml',
           roles: ['user'],
           name: `${profile.firstName} ${profile.lastName}`
         }

@@ -19,17 +19,28 @@ cds.on('loaded', services => {
 
     if (definition['@Authorization.Type']) {
       const type = definition['@Authorization.Type']
-      const path =
-        definition['@Authorization.LoginPath'] ??
-        `/odata/v4/${name.toLowerCase().substring(0, name.length - 7)}`
-      LOG.info(`Register ${type} authentication for route ${path}`)
+      const path = `/odata/v4/${name
+        .toLowerCase()
+        .substring(0, name.length - 7)}`
+      const loginPath = definition['@Authorization.LoginPath'] ?? path
+
+      LOG.info(`Register ${type} login for route ${loginPath}`)
       cds.app.use(
-        path,
+        loginPath,
         passport.authenticate(type, { session: true }),
         async function (_req, _res, next) {
           next()
         }
       )
+
+      LOG.info(`Register ${type} authentication for route ${loginPath}`)
+      cds.app.use(path, async function (req, res, next) {
+        if (!req.user || req.user.type !== type) {
+          LOG.warn(`User logged in with method wrong authentication method`)
+          return res.status(401).send({})
+        }
+        next()
+      })
     }
   }
 })

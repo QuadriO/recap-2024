@@ -2,7 +2,7 @@
 GET  http://localhost:4004/odata/v4/basiccatalog/Books
 
 ### Basic Auth Catalog Service with user
-GET  http://localhost:4004/odata/v4/basiccatalog/Books
+GET  http://localhost:4004/odata/v4/samlcatalog/Books
 Authorization: Basic user:123456
 
 ### Basic Auth Admin Catalog Service
