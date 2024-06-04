@@ -36,7 +36,7 @@ cds.on('loaded', services => {
       LOG.info(`Register ${type} authentication for route ${loginPath}`)
       cds.app.use(path, async function (req, res, next) {
         if (!req.user || req.user.type !== type) {
-          LOG.warn(`User logged in with method wrong authentication method`)
+          LOG.warn(`User logged in with wrong authentication method`)
           return res.status(401).send({})
         }
         next()
